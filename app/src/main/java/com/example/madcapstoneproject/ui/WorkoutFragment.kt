@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcapstoneproject.R
+import com.example.madcapstoneproject.database.WorkoutRepository
 import com.example.madcapstoneproject.model.Workout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_workouts.*
  */
 class WorkoutFragment : Fragment() {
 
+    private lateinit var workoutRepository: WorkoutRepository
+
     private var workouts = arrayListOf<Workout>()
     private var workoutAdapter=WorkoutAdapter(workouts)
 
@@ -31,13 +34,25 @@ class WorkoutFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_workouts, container, false)
+
+    }
+
+    private fun getWorkoutsFromDatabase(){
+        val workouts = workoutRepository.getAllWorkouts()
+        this@WorkoutFragment.workouts.clear()
+        this@WorkoutFragment.workouts.addAll(workouts)
+        workoutAdapter.notifyDataSetChanged()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-
+        workoutRepository = WorkoutRepository(requireContext())
+        getWorkoutsFromDatabase()
     }
+
+
 
     private fun initViews() {
         rv_workouts.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)

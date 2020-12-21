@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.CreateExerciseFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,8 +34,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tvCreateExerciseName"
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="286dp"
+                android:singleLine="true"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:hint="@string/createexercisetitle" />
@@ -43,6 +43,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tvCreateExerciseTime"
                 android:layout_width="match_parent"
+                android:singleLine="true"
+                android:inputType="number"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:layout_weight="1"

@@ -1,6 +1,7 @@
 package com.example.madcapstoneproject.ui
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -17,22 +18,32 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         navController = findNavController(R.id.nav_host_fragment)
-        fab.setOnClickListener{
-            fabToggler()
-        }
+
+        fabToggler()
     }
     private fun fabToggler() {
         navController.addOnDestinationChangedListener{_,destination,_->
-            if(destination.id in arrayOf(R.id.workoutFragment)){
-                navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment)
-            } else{
-                navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment2)
+            if(destination.id in arrayOf(R.id.workoutFragment)) {
+                fab.setOnClickListener{
+                    navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment)
+                }
+            }
+            if(destination.id in arrayOf(R.id.createWorkoutFragment)) {
+                fab.setOnClickListener{
+                    navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment)
+                }
+            }
+            if(destination.id in arrayOf(R.id.createExerciseFragment)) {
+                fab.setOnClickListener{
+                    navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
+                }
             }
         }
     }

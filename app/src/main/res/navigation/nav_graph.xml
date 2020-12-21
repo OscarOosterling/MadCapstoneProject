@@ -19,12 +19,16 @@
         android:label="fragment_createworkout"
         tools:layout="@layout/fragment_createworkout" >
         <action
-            android:id="@+id/action_createWorkoutFragment_to_createExerciseFragment2"
-            app:destination="@id/createExerciseFragment2" />
+            android:id="@+id/action_createWorkoutFragment_to_createExerciseFragment"
+            app:destination="@id/createExerciseFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createExerciseFragment2"
+        android:id="@+id/createExerciseFragment"
         android:name="com.example.madcapstoneproject.ui.CreateExerciseFragment"
         android:label="fragment_createexercise"
-        tools:layout="@layout/fragment_createexercise" />
+        tools:layout="@layout/fragment_createexercise" >
+        <action
+            android:id="@+id/action_createExerciseFragment_to_createWorkoutFragment"
+            app:destination="@id/createWorkoutFragment" />
+    </fragment>
 </navigation>

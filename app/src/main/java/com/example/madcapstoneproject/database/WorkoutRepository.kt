@@ -1,6 +1,8 @@
 package com.example.madcapstoneproject.database
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.madcapstoneproject.model.Workout
 import com.example.madcapstoneproject.database.*
 
@@ -12,8 +14,8 @@ public class WorkoutRepository (context: Context){
         workoutDao = workoutRoomDatabase!!.workoutDao()
     }
 
-    fun getAllWorkouts():List<Workout>{
-        return workoutDao.getAllWorkouts()
+    fun getAllWorkouts():LiveData<List<Workout>>{
+        return workoutDao.getAllWorkouts()?:MutableLiveData(emptyList())
     }
 
     fun insertWorkout(workout: Workout){

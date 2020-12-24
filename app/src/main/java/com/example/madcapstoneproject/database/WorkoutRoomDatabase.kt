@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.madcapstoneproject.converters.Converters
 import com.example.madcapstoneproject.model.Workout
 
 
 @Database(entities = [Workout::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
     abstract fun workoutDao(): WorkoutDao

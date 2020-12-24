@@ -12,18 +12,20 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.madcapstoneproject.R
+import com.example.madcapstoneproject.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         setSupportActionBar(findViewById(R.id.toolbar))
-
         navController = findNavController(R.id.nav_host_fragment)
 
         fabToggler()
@@ -31,17 +33,17 @@ class MainActivity : AppCompatActivity() {
     private fun fabToggler() {
         navController.addOnDestinationChangedListener{_,destination,_->
             if(destination.id in arrayOf(R.id.workoutFragment)) {
-                fab.setOnClickListener{
+                binding.fab.setOnClickListener{
                     navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment)
                 }
             }
             if(destination.id in arrayOf(R.id.createWorkoutFragment)) {
-                fab.setOnClickListener{
+                binding.fab.setOnClickListener{
                     navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment)
                 }
             }
             if(destination.id in arrayOf(R.id.createExerciseFragment)) {
-                fab.setOnClickListener{
+                binding.fab.setOnClickListener{
                     navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
                 }
             }

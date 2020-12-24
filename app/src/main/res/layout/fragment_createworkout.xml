@@ -4,17 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateWorkoutFragment">
+    tools:context=".ui.CreateWorkoutFragment"
+    >
 
-    <TextView
-        android:id="@+id/tv_workoutname"
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_height="64dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_workout_items"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tv_workoutname"
+            android:layout_width="322dp"
+            android:layout_height="match_parent"
+            android:hint="@string/workoutName"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_workout"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="32dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="321dp"
+            tools:layout_editor_absoluteY="21dp" />
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_workout_items"
@@ -22,7 +42,9 @@
         android:layout_height="637dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_workoutname" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

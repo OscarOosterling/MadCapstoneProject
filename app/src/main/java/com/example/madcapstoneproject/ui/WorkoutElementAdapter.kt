@@ -31,5 +31,4 @@ class WorkoutElementAdapter (private val workoutElements:List<WorkoutElement>): 
         return workoutElements.size
     }
 
-
 }

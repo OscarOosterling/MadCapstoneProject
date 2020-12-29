@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             if(destination.id in arrayOf(R.id.workoutFragment)) {
                 binding.fab.isVisible = true
                 binding.fab.setOnClickListener{
-                    navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment)
+                    navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment,)
+                    editMode = false
                 }
             }
             if(destination.id in arrayOf(R.id.createWorkoutFragment)) {

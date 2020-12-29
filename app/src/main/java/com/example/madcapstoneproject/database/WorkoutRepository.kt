@@ -26,6 +26,10 @@ public class WorkoutRepository (context: Context){
         workoutDao.deleteWorkout(workout)
     }
 
+    fun updateWorkout(workout: Workout){
+        workoutDao.updateWorkout(workout)
+    }
+
     fun getSpecificWorkout(id:String):Workout{
         return workoutDao.getSpecificWorkout(id)
     }

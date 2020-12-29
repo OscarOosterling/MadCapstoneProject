@@ -56,8 +56,10 @@ class WorkoutFragment : Fragment() {
     }
     private fun workoutItemClicked(workout:Workout){
         val selectedWorkout = viewModel.getWorkout(workout.id.toString())
+        workoutID = workout.id.toString()
         setFragmentResult(REQ_WORKOUT_KEY, bundleOf(Pair(BUNDLE_WORKOUT_KEY,selectedWorkout)))
-        findNavController().navigate(R.id.action_workoutFragment_to_workoutActivityFragment)
+        findNavController().navigate(R.id.action_workoutFragment_to_startOrEditFragment)
+        editMode = true;
     }
 
     private fun observeAddWorkoutResult(){
@@ -72,7 +74,6 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeAddWorkoutResult()
-
     }
 
 

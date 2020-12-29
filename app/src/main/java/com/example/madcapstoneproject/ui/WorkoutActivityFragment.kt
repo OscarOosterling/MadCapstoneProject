@@ -75,7 +75,6 @@ class WorkoutActivityFragment : Fragment() {
             }
 
             override fun onTick(p0: Long) {
-                Log.e(time.toString(),p0.toString())
                 binding.tvActivityTime.setText((p0/1000).toString())
             }
         }

@@ -14,12 +14,17 @@ class WorkoutViewModel (application: Application):AndroidViewModel(application){
 
     val workouts:LiveData<List<Workout>> = workoutRepository.getAllWorkouts()
 
+
     fun insertWorkout(workout: Workout){
         ioScope.launch { workoutRepository.insertWorkout(workout) }
     }
 
     fun deleteWorkout(workout: Workout){
         ioScope.launch { workoutRepository.deleteWorkout(workout) }
+    }
+
+    fun updateWorkout(workout: Workout){
+        ioScope.launch { workoutRepository.updateWorkout(workout) }
     }
 
     fun getWorkout(id:String):Workout{

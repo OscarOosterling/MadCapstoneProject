@@ -1,10 +1,7 @@
 package com.example.madcapstoneproject.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.madcapstoneproject.model.Workout
 
 @Dao
@@ -17,6 +14,9 @@ interface WorkoutDao{
 
     @Delete
     fun deleteWorkout(workout: Workout)
+
+    @Update
+    fun updateWorkout(workout: Workout)
 
     @Query("SELECT * FROM  workoutTable WHERE id IS :id")
     fun getSpecificWorkout(id: String):Workout

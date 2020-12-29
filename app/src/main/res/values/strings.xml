@@ -20,4 +20,6 @@
     <string name="CurrentExercise">Current Exercise</string>
     <string name="ExerciseTime">Time Left</string>
     <string name="nextExercise">Next Exercise</string>
+    <string name="startworkout">Start Workout</string>
+    <string name="editworkout">Edit Workout</string>
 </resources>

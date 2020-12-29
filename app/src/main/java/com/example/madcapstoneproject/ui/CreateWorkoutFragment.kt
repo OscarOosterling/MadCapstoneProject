@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcapstoneproject.R
 import com.example.madcapstoneproject.databinding.FragmentCreateworkoutBinding
 import com.example.madcapstoneproject.model.Workout
 import com.example.madcapstoneproject.model.WorkoutElement
@@ -21,6 +23,9 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+var editMode = false;
+var workoutID:String = "workoutID"
+
 class CreateWorkoutFragment : Fragment() {
 
     private val viewModel:WorkoutViewModel by viewModels()
@@ -30,7 +35,6 @@ class CreateWorkoutFragment : Fragment() {
 
     private var exercises = arrayListOf<WorkoutElement>()
     private var exerciseAdapter=WorkoutElementAdapter(exercises)
-
 
 
 
@@ -47,10 +51,36 @@ class CreateWorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         binding.btnAddWorkout.setOnClickListener{
-            addWorkout()
+            addOrUpdateWorkout()
         }
         observeAddExerciseResult()
+        if(editMode){
+            loadWorkout()
+        }
+    }
 
+    private fun addOrUpdateWorkout(){
+        if(!editMode){
+            addWorkout()}
+        else{
+            viewModel.deleteWorkout(viewModel.getWorkout(workoutID))
+            addWorkout()
+        }
+    }
+    private fun loadWorkout(){
+
+        observeGetWorkoutResult()
+    }
+
+    private fun observeGetWorkoutResult(){
+        setFragmentResultListener(REQ_WORKOUT_KEY){
+                key,bundle->bundle.getParcelable<Workout>(BUNDLE_WORKOUT_KEY)?.let{
+            binding.tvWorkoutname.setText(it.title)
+            binding.etRounds.setText(it.rounds)
+            exercises.addAll(it.exercises)
+            exerciseAdapter.notifyDataSetChanged()
+        }?: Log.e("exerciseFragment","Request triggered,but empty workout text")
+        }
     }
     private fun initViews(){
         binding.rvWorkoutItems.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
@@ -65,7 +95,7 @@ class CreateWorkoutFragment : Fragment() {
                 exercises = exercises,
                 rounds = binding.etRounds.text.toString()))
         }
-        findNavController().popBackStack()
+        findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutFragment)
     }
 
     override fun onDestroyView() {

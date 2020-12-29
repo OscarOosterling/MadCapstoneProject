@@ -21,4 +21,9 @@ class WorkoutViewModel (application: Application):AndroidViewModel(application){
     fun deleteWorkout(workout: Workout){
         ioScope.launch { workoutRepository.deleteWorkout(workout) }
     }
+
+    fun getWorkout(id:String):Workout{
+       return  workoutRepository.getSpecificWorkout(id)
+    }
+
 }

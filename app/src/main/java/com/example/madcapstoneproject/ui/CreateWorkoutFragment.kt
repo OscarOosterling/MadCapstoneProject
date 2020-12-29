@@ -62,7 +62,8 @@ class CreateWorkoutFragment : Fragment() {
         if(binding.tvWorkoutname.text.toString() !=""){
             viewModel.insertWorkout(workout = Workout(
                 title = binding.tvWorkoutname.text.toString(),
-                exercises = exercises))
+                exercises = exercises,
+                rounds = binding.etRounds.text.toString()))
         }
         findNavController().popBackStack()
     }

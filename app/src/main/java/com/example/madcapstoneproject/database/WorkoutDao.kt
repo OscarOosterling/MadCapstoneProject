@@ -18,4 +18,6 @@ interface WorkoutDao{
     @Delete
     fun deleteWorkout(workout: Workout)
 
+    @Query("SELECT * FROM  workoutTable WHERE id IS :id")
+    fun getSpecificWorkout(id: String):Workout
 }

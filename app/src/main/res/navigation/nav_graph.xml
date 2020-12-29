@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_workoutFragment_to_createWorkoutFragment"
             app:destination="@id/createWorkoutFragment" />
+        <action
+            android:id="@+id/action_workoutFragment_to_workoutActivityFragment"
+            app:destination="@id/workoutActivityFragment" />
     </fragment>
     <fragment
         android:id="@+id/createWorkoutFragment"
@@ -30,5 +33,13 @@
         <action
             android:id="@+id/action_createExerciseFragment_to_createWorkoutFragment"
             app:destination="@id/createWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutActivityFragment"
+        android:name="com.example.madcapstoneproject.ui.WorkoutActivityFragment"
+        android:label="fragment_activityworkout" >
+        <action
+            android:id="@+id/action_workoutActivityFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment" />
     </fragment>
 </navigation>

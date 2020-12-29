@@ -20,19 +20,32 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tv_workoutname"
-            android:layout_width="322dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:hint="@string/workoutName"
             app:layout_constraintEnd_toStartOf="@+id/btn_add_workout"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="32dp" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRounds"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/Rounds"
+            android:inputType="number" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add_workout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:text="@string/AddWorkoutText"
+            android:textSize="10dp"
             tools:layout_editor_absoluteX="321dp"
             tools:layout_editor_absoluteY="21dp" />
+
     </LinearLayout>
 
 

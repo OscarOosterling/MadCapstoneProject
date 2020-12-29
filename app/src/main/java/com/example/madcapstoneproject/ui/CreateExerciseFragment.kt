@@ -24,7 +24,6 @@ const val BUNDLE_EXERCISE_KEY = "bundle_exercise"
 class CreateExerciseFragment : Fragment() {
 
 
-
     private var _binding:FragmentCreateexerciseBinding?=null
     private val binding get() = _binding!!
 

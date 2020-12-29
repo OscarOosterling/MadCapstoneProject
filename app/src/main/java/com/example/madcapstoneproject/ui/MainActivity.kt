@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
@@ -33,19 +34,20 @@ class MainActivity : AppCompatActivity() {
     private fun fabToggler() {
         navController.addOnDestinationChangedListener{_,destination,_->
             if(destination.id in arrayOf(R.id.workoutFragment)) {
+                binding.fab.isVisible = true
                 binding.fab.setOnClickListener{
                     navController.navigate(R.id.action_workoutFragment_to_createWorkoutFragment)
                 }
             }
             if(destination.id in arrayOf(R.id.createWorkoutFragment)) {
+                binding.fab.isVisible = true
+
                 binding.fab.setOnClickListener{
                     navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment)
                 }
             }
             if(destination.id in arrayOf(R.id.createExerciseFragment)) {
-                binding.fab.setOnClickListener{
-                    navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
-                }
+                binding.fab.isVisible = false
             }
         }
     }

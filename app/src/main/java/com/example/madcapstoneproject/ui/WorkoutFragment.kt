@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,6 +20,7 @@ import com.example.madcapstoneproject.database.WorkoutRepository
 import com.example.madcapstoneproject.databinding.FragmentCreateworkoutBinding
 import com.example.madcapstoneproject.databinding.FragmentWorkoutsBinding
 import com.example.madcapstoneproject.model.Workout
+import com.example.madcapstoneproject.model.WorkoutElement
 import com.example.madcapstoneproject.model.WorkoutViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +36,9 @@ class WorkoutFragment : Fragment() {
 
 
     private var workouts = arrayListOf<Workout>()
-    private var workoutAdapter=WorkoutAdapter(workouts)
+    private var workoutAdapter=WorkoutAdapter(workouts){
+        workout: Workout -> workoutItemClicked(workout)
+    }
 
     private val viewModel:WorkoutViewModel by viewModels()
 
@@ -48,12 +54,16 @@ class WorkoutFragment : Fragment() {
         val view = binding.root
         return view
     }
+    private fun workoutItemClicked(workout:Workout){
+        val selectedWorkout = viewModel.getWorkout(workout.id.toString())
+        setFragmentResult(REQ_WORKOUT_KEY, bundleOf(Pair(BUNDLE_WORKOUT_KEY,selectedWorkout)))
+        findNavController().navigate(R.id.action_workoutFragment_to_workoutActivityFragment)
+    }
 
     private fun observeAddWorkoutResult(){
         viewModel.workouts.observe(viewLifecycleOwner, Observer { workouts ->
             this@WorkoutFragment.workouts.clear()
             this@WorkoutFragment.workouts.addAll(workouts)
-            Log.e("workouts",workouts.toString())
             workoutAdapter.notifyDataSetChanged()
         })
     }

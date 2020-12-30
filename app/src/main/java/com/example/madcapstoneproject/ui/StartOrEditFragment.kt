@@ -25,6 +25,7 @@ class StartOrEditFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.btnStartWorkout.setOnClickListener{
             findNavController().navigate(R.id.action_startOrEditFragment_to_workoutActivityFragment)
         }

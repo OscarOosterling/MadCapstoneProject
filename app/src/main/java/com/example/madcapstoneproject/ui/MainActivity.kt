@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
             if(destination.id in arrayOf(R.id.createExerciseFragment)) {
                 binding.fab.isVisible = false
             }
-        }
+            if(destination.id in arrayOf(R.id.workoutActivityFragment)) {
+                binding.fab.isVisible = false
+            }
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

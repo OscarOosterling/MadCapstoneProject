@@ -22,4 +22,10 @@
     <string name="nextExercise">Next Exercise</string>
     <string name="startworkout">Start Workout</string>
     <string name="editworkout">Edit Workout</string>
+    <string name="snackbarnotitleortime">You forgot to input a title or time</string>
+    <string name="saveworkoutbutton">Save Workout</string>
+    <string name="editworkouttitle">\"Edit \"</string>
+    <string name="createworkouttitle">Create Workout</string>
+    <string name="createexercisetitletext">Create Exercise</string>
+    <string name="snackbarcreateworkout">You forgot to input exercises or rounds or a title.</string>
 </resources>

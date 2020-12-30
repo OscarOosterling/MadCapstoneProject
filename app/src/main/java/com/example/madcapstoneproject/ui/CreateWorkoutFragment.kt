@@ -18,6 +18,7 @@ import com.example.madcapstoneproject.databinding.FragmentCreateworkoutBinding
 import com.example.madcapstoneproject.model.Workout
 import com.example.madcapstoneproject.model.WorkoutElement
 import com.example.madcapstoneproject.model.WorkoutViewModel
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 /**
@@ -49,6 +50,7 @@ class CreateWorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().title = getString(R.string.createworkouttitle)
         initViews()
         binding.btnAddWorkout.setOnClickListener{
             addOrUpdateWorkout()
@@ -70,11 +72,13 @@ class CreateWorkoutFragment : Fragment() {
     private fun loadWorkout(){
 
         observeGetWorkoutResult()
+        binding.btnAddWorkout.text = getString(R.string.saveworkoutbutton)
     }
 
     private fun observeGetWorkoutResult(){
         setFragmentResultListener(REQ_WORKOUT_KEY){
                 key,bundle->bundle.getParcelable<Workout>(BUNDLE_WORKOUT_KEY)?.let{
+            requireActivity().title = getString(R.string.editworkouttitle)+it.title
             binding.tvWorkoutname.setText(it.title)
             binding.etRounds.setText(it.rounds)
             exercises.addAll(it.exercises)
@@ -89,13 +93,18 @@ class CreateWorkoutFragment : Fragment() {
     }
 
     private fun addWorkout() {
-        if(binding.tvWorkoutname.text.toString() !=""){
+        if(binding.tvWorkoutname.text.toString() !="" && binding.etRounds.text.toString()!="" && exercises.count()>0){
             viewModel.insertWorkout(workout = Workout(
                 title = binding.tvWorkoutname.text.toString(),
                 exercises = exercises,
                 rounds = binding.etRounds.text.toString()))
+            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutFragment)
+        }else{
+            var snack =  Snackbar.make(binding.linearLayout,getString(R.string.snackbarcreateworkout),
+                Snackbar.LENGTH_LONG)
+            snack.show()
         }
-        findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutFragment)
+
     }
 
     override fun onDestroyView() {

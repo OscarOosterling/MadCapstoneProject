@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.madcapstoneproject.model.Workout
 import com.example.madcapstoneproject.database.*
-
 public class WorkoutRepository (context: Context){
     private var workoutDao:WorkoutDao
 
@@ -18,19 +17,19 @@ public class WorkoutRepository (context: Context){
         return workoutDao.getAllWorkouts()?:MutableLiveData(emptyList())
     }
 
-    fun insertWorkout(workout: Workout){
+    suspend fun insertWorkout(workout: Workout){
         workoutDao.insertWorkout(workout)
     }
 
-    fun deleteWorkout(workout: Workout){
+    suspend fun deleteWorkout(workout: Workout){
         workoutDao.deleteWorkout(workout)
     }
 
-    fun updateWorkout(workout: Workout){
+    suspend fun updateWorkout(workout: Workout){
         workoutDao.updateWorkout(workout)
     }
 
-    fun getSpecificWorkout(id:String):Workout{
+      fun getSpecificWorkout(id:String):Workout{
         return workoutDao.getSpecificWorkout(id)
     }
 }

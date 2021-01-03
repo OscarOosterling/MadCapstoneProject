@@ -27,6 +27,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_workouts.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -56,14 +59,17 @@ class WorkoutFragment : Fragment() {
         return view
     }
     private fun workoutItemClicked(workout:Workout){
-        val selectedWorkout = viewModel.getWorkout(workout.id.toString())
-        workoutID = workout.id.toString()
-        requireActivity().title = selectedWorkout.title
-        setFragmentResult(REQ_WORKOUT_KEY, bundleOf(Pair(BUNDLE_WORKOUT_KEY,selectedWorkout)))
+
+            val selectedWorkout = viewModel.getWorkout(workout.id.toString())
+            workoutID = workout.id.toString()
+            requireActivity().title = selectedWorkout.title
+            setFragmentResult(REQ_WORKOUT_KEY, bundleOf(Pair(BUNDLE_WORKOUT_KEY,selectedWorkout)))
+
         findNavController().navigate(R.id.action_workoutFragment_to_startOrEditFragment)
         editMode = true;
     }
 
+    //Gets called when fragment is shown, looks if any new workouts have been added.
     private fun observeAddWorkoutResult(){
         viewModel.workouts.observe(viewLifecycleOwner, Observer { workouts ->
             this@WorkoutFragment.workouts.clear()
@@ -76,7 +82,7 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeAddWorkoutResult()
-        requireActivity().title = "Workouts"
+        requireActivity().title = getString(R.string.fragmentworkouttitle)
     }
 
 

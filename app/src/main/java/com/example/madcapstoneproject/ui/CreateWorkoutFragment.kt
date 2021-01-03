@@ -75,6 +75,7 @@ class CreateWorkoutFragment : Fragment() {
         binding.btnAddWorkout.text = getString(R.string.saveworkoutbutton)
     }
 
+    //Gets workout from selected workout in workoutfragment
     private fun observeGetWorkoutResult(){
         setFragmentResultListener(REQ_WORKOUT_KEY){
                 key,bundle->bundle.getParcelable<Workout>(BUNDLE_WORKOUT_KEY)?.let{
@@ -92,6 +93,7 @@ class CreateWorkoutFragment : Fragment() {
         createItemTouchHelper().attachToRecyclerView(binding.rvWorkoutItems)
     }
 
+    //Adds workout to database
     private fun addWorkout() {
         if(binding.tvWorkoutname.text.toString() !="" && binding.etRounds.text.toString()!="" && exercises.count()>0){
             viewModel.insertWorkout(workout = Workout(
@@ -112,6 +114,7 @@ class CreateWorkoutFragment : Fragment() {
         _binding = null
     }
 
+    //Adds exercise to workouts exercise list
     private fun observeAddExerciseResult(){
         setFragmentResultListener(REQ_EXERCISE_KEY){
                 key,bundle->bundle.getParcelable<WorkoutElement>(BUNDLE_EXERCISE_KEY)?.let{

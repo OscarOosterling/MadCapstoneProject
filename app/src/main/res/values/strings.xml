@@ -28,4 +28,7 @@
     <string name="createworkouttitle">Create Workout</string>
     <string name="createexercisetitletext">Create Exercise</string>
     <string name="snackbarcreateworkout">You forgot to input exercises or rounds or a title.</string>
+    <string name="activityroundtext">\"Round: \"</string>
+    <string name="dashbetweenroundtext">\" / \"</string>
+    <string name="fragmentworkouttitle">Workouts</string>
 </resources>

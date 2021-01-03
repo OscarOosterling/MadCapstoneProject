@@ -48,6 +48,7 @@ class CreateExerciseFragment : Fragment() {
             addExercise()
         }
     }
+    //Gets data from view,creates a workoutelement and sets fragment result with this workoutelement.
     fun addExercise(){
         val exercise = WorkoutElement(binding.tvCreateExerciseName.text.toString(),binding.tvCreateExerciseTime.text.toString())
         if(binding.tvCreateExerciseName.text.toString() != "" && binding.tvCreateExerciseTime.text.toString() != ""){

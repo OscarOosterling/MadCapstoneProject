@@ -1,5 +1,6 @@
 package com.example.madcapstoneproject.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -40,6 +41,7 @@ class WorkoutActivityFragment : Fragment() {
 
         observeGetWorkoutResult()
     }
+    //Gets selected workout from Workoutfragment
     private fun observeGetWorkoutResult(){
 
         setFragmentResultListener(REQ_WORKOUT_KEY){
@@ -59,14 +61,7 @@ class WorkoutActivityFragment : Fragment() {
     }
 
 
-    /*private fun calculateRoundTime(exercises: List<WorkoutElement>):String{
-        var roundTime:Long= 0
-        for(item in exercises){
-            roundTime+= item.time?.toLong()!!
-        }
-        return roundTime.toString()
-    }*/
-
+    //Starts the workout, and initiates the countdown
     private fun startCountDown(workout: Workout,exerciseNumber:Int,roundNumber:Int){
         var time = workout.exercises[exerciseNumber].time?.toLong()!!*1000
         countDownTimer = object:CountDownTimer(time,1000){
@@ -75,12 +70,14 @@ class WorkoutActivityFragment : Fragment() {
             }
 
             override fun onTick(p0: Long) {
-                binding.tvActivityTime.setText((p0/1000).toString())
+                binding.tvActivityTime.text = (p0/1000).toString()
             }
         }
         countDownTimer.start()
     }
 
+    //Gets called when countdown is finished, Checks if current exercise is last exercise and if current round is last round
+    // When it is not it will start a new timer with updated exercise names and rounds
     private fun setNextRound(
         workout: Workout,
         exerciseNumber: Int,
@@ -92,9 +89,10 @@ class WorkoutActivityFragment : Fragment() {
                 findNavController().navigate(R.id.action_workoutActivityFragment_to_workoutFragment)
             }else{
                 //END OF ROUND
-                binding.tvActivityRound.setText("Round: "+(roundNumber.toInt()+1).toString()+" / "+workout.rounds)
-                binding.tvActivityTitle.setText(workout.exercises[0].title)
-                binding.tvActivityNext.setText(workout.exercises[1].title)
+                binding.tvActivityRound.text = getString(R.string.activityroundtext)+(roundNumber.toInt()+1).toString()+getString(
+                    R.string.dashbetweenroundtext)+workout.rounds
+                binding.tvActivityTitle.text = workout.exercises[0].title
+                binding.tvActivityNext.text = workout.exercises[1].title
                 startCountDown(workout,0,roundNumber+1)
             }
         }else{
@@ -114,8 +112,4 @@ class WorkoutActivityFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

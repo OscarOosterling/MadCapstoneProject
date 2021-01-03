@@ -27,7 +27,7 @@ class WorkoutViewModel (application: Application):AndroidViewModel(application){
         ioScope.launch { workoutRepository.updateWorkout(workout) }
     }
 
-    fun getWorkout(id:String):Workout{
+     fun getWorkout(id:String):Workout{
        return  workoutRepository.getSpecificWorkout(id)
     }
 
